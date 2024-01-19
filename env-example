@@ -1,0 +1,5 @@
+WEB_HOOK_URL=''
+APP_NAME = "app"
+PROJECT_NAME="Project Name"
+BOT_NAME="Server Monitor"
+BOT_AVATAR='https://unsplash.com/photos/a-painting-of-a-man-with-a-book-in-his-hand-joFtW-nE6sI'
