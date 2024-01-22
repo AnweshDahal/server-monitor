@@ -54,7 +54,7 @@ def listen_to_pm2_logs(app_name):
                         
                     ]
                 })
-                print(t.text)
+                print("An Error Occured", t.text)
 
         # Wait for the process to finish (Ctrl+C to exit)
         process.wait()
