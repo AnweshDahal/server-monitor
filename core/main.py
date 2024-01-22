@@ -55,7 +55,7 @@ def listen_to_pm2_logs(app_name):
                                 "name": os.environ.get("PROJECT_NAME"),
                             },
                             "title": "An Error has Occurred in the Server",
-                            "description": f'```\n{line.strip()}\n```',
+                            "description": 'See the file',
                             "color": int("ff0000", 16),
                             "footer": {
                                 "text": "Please review the server ASAP"
