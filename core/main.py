@@ -32,7 +32,6 @@ def listen_to_pm2_logs(app_name):
         print(process)
         # Read and print logs line by line in real-time
         for line in process.stdout:
-            print("New Log")
             if "ERROR" in line.strip().upper():
                 # url = 
                 file_path = "error.json"
@@ -70,14 +69,14 @@ def listen_to_pm2_logs(app_name):
                 if t.status_code == 200:
                     print("Error Reported Successfully")
                 else:
-                    print(f'Failed to send string. Status code: {t.status_code}')
+                    print(f'Failed to send Report. Status code: {t.status_code}')
 
                 s = requests.post(os.environ.get("WEB_HOOK_URL"), files=payload)
 
                 if s.status_code == 200:
-                    print("Error Reported Successfully")
+                    print("Error file sent successfully")
                 else:
-                    print(f'Failed to send string. Status code: {s.status_code}')
+                    print(f'Failed to send Error File. Status code: {s.status_code}')
 
                 try:
                     os.remove(file_path)
