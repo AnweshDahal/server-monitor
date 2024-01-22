@@ -41,7 +41,11 @@ def listen_to_pm2_logs(app_name):
                     file.write(line.strip())
 
                 payload = {
-                    'content': { 
+                    'content': 'Error Log:',
+                    'file': (file_path, open(file_path, 'rb'))
+                }
+
+                t = requests.post(os.environ.get("WEB_HOOK_URL"), json = { 
                     "username": os.environ.get("BOT_NAME"),
                     "avatar_url": os.environ.get("BOT_AVATAR"), 
                     "content": "Server Monitor Alert",
@@ -59,16 +63,19 @@ def listen_to_pm2_logs(app_name):
                         },
                         
                     ]
-                },
-                    'file': (file_path, open(file_path, 'rb'))
-                }
+                })
 
-                t = requests.post(os.environ.get("WEB_HOOK_URL"), files=payload)
+                s = requests.post(os.environ.get("WEB_HOOK_URL"), files=payload)
 
                 if t.status_code == 200:
                     print("Error Reported Successfully")
                 else:
                     print(f'Failed to send string. Status code: {t.status_code}')
+                    
+                if s.status_code == 200:
+                    print("Error Reported Successfully")
+                else:
+                    print(f'Failed to send string. Status code: {s.status_code}')
 
                 try:
                     os.remove(file_path)
