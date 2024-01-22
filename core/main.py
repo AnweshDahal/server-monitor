@@ -63,5 +63,5 @@ def listen_to_pm2_logs(app_name):
         print(f"Error listening to PM2 logs: {e}")
 
 # Replace 'your_app_name' with the actual name of your PM2 app
-listen_to_pm2_logs('index')
+listen_to_pm2_logs(os.environ.get("APP_NAME"))
 
