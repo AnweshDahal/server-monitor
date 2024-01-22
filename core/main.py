@@ -23,6 +23,7 @@ import os
 load_dotenv()
 
 def listen_to_pm2_logs(app_name):
+    print("Starting Server")
     try:
         # Run PM2 logs command and capture the output
         cmd = f"pm2 logs {app_name} --json"
