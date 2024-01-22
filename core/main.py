@@ -65,22 +65,26 @@ def listen_to_pm2_logs(app_name):
                     ]
                 })
 
-                s = requests.post(os.environ.get("WEB_HOOK_URL"), files=payload)
+                
 
                 if t.status_code == 200:
                     print("Error Reported Successfully")
+                    s = requests.post(os.environ.get("WEB_HOOK_URL"), files=payload)
+
+                    if s.status_code == 200:
+                        print("Error Reported Successfully")
+                    else:
+                        print(f'Failed to send string. Status code: {s.status_code}')
+
+                    try:
+                        os.remove(file_path)
+                    except OSError:
+                        pass
                 else:
                     print(f'Failed to send string. Status code: {t.status_code}')
-                    
-                if s.status_code == 200:
-                    print("Error Reported Successfully")
-                else:
-                    print(f'Failed to send string. Status code: {s.status_code}')
 
-                try:
-                    os.remove(file_path)
-                except OSError:
-                    pass
+
+                
 
         # Wait for the process to finish (Ctrl+C to exit)
         process.wait()
