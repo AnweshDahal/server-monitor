@@ -35,17 +35,13 @@ def listen_to_pm2_logs(app_name):
             print("New Log")
             if "ERROR" in line.strip().upper():
                 # url = 
-                file_path = "error.txt"
+                file_path = "error.json"
 
                 with open(file_path, 'w') as file:
                     file.write(line.strip())
 
                 payload = {
-                    'content': 'Error Log:',
-                    'file': (file_path, open(file_path, 'rb'))
-                }
-
-                t = requests.post(os.environ.get("WEB_HOOK_URL"), json = { 
+                    'content': { 
                     "username": os.environ.get("BOT_NAME"),
                     "avatar_url": os.environ.get("BOT_AVATAR"), 
                     "content": "Server Monitor Alert",
@@ -63,7 +59,11 @@ def listen_to_pm2_logs(app_name):
                         },
                         
                     ]
-                }, files=payload)
+                },
+                    'file': (file_path, open(file_path, 'rb'))
+                }
+
+                t = requests.post(os.environ.get("WEB_HOOK_URL"), files=payload)
 
                 if t.status_code == 200:
                     print("Error Reported Successfully")
