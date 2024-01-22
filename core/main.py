@@ -31,6 +31,7 @@ def listen_to_pm2_logs(app_name):
 
         # Read and print logs line by line in real-time
         for line in process.stdout:
+            print("New Log")
             if "ERROR" in line.strip().upper():
                 # url = 
                 t = requests.post(os.environ.get("WEB_HOOK_URL"), json = { 
