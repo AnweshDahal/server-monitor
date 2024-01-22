@@ -29,7 +29,6 @@ def listen_to_pm2_logs(app_name):
         cmd = f"pm2 logs {app_name} --json"
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, text=True)
 
-        print("ERROR" in line.strip().upper(), line.strip())
         # Read and print logs line by line in real-time
         for line in process.stdout:
             print("New Log")
