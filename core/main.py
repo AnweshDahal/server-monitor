@@ -10,6 +10,36 @@ load_dotenv()
 def listen_to_pm2_logs(app_name):
     print("Starting Server")
     try:
+        s = requests.post(os.environ.get("WEB_HOOK_URL"), json={
+            "cards": [
+                {
+                    "header": {
+                        "title": os.environ.get("BOT_NAME"),
+                        "subtitle": os.environ.get("PROJECT_NAME")
+                    },
+                    "sections": [
+                        {
+                            "header": "Server Monitor Running",
+                            "widgets": [
+                                {
+                                    "textParagraph": {
+                                        "text": "All PM2 errors will be sent here"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+
+        })
+
+        if s.status_code == 200:
+            print("Error Reported Successfully")
+        else:
+            print(
+                f'Failed to send Report. Status code: {s.status_code}')
+
         # Run PM2 logs command and capture the output
         cmd = f"pm2 logs {app_name} --json"
         process = subprocess.Popen(
