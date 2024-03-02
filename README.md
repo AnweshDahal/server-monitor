@@ -18,7 +18,3 @@ This is a simple **PM2** monitor built using **Python**. It sends alert using Di
   pm2 start core/main.py --interpreter /home/user/server-monitor/.venv/bin/python3 --name server-monitor
   # make sure that the path to your interpreter is correct
 ```
-
-### Learn More About Discord Webhook Payload
-
-https://birdie0.github.io/discord-webhooks-guide/discord_webhook.html
